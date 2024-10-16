@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 public class DbContactos extends DbHelper {
 
     Context context;
-
     public DbContactos(@Nullable Context context) {
         super(context);
         this.context = context;
@@ -37,7 +36,6 @@ public class DbContactos extends DbHelper {
         }
 
     }
-
-
 }
+
 

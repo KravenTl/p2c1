@@ -1,5 +1,6 @@
 package gt.edu.umg.pc2c1.BaseDatos;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -27,5 +28,19 @@ public class DbHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTOS);
         onCreate(db);
+    }
+
+    // Método para insertar un contacto en la base de datos
+    public long insertarContacto(String nombre, String telefono, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nombre", nombre);
+        values.put("telefono", telefono);
+        values.put("email", email);
+
+        // Insertar fila
+        long resultado = db.insert(TABLE_CONTACTOS, null, values);
+        db.close(); // Cerrar conexión a la base de datos
+        return resultado;
     }
 }
