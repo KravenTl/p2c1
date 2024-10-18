@@ -42,4 +42,10 @@
         android:minHeight="48dp"
         android:text="@string/btnGuardar" />
 
+    <TextView
+        android:id="@+id/textDatos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Yourgen Kraven Thommel Arévalo 0905-23-14003" />
+
 </LinearLayout>
