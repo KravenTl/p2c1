@@ -1,5 +1,6 @@
 package gt.edu.umg.pc2c1;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,9 +18,10 @@ public class NuevoActivity extends AppCompatActivity {
 
 
     // Declaración de los elementos de la interfaz
-    Button btnGuardar;
+    Button btnGuardar,btn_regresar;
     EditText txtNombre, txtTelefono, txtEmail;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +35,14 @@ public class NuevoActivity extends AppCompatActivity {
         txtTelefono = findViewById(R.id.txtTelefono);
         txtEmail = findViewById(R.id.txtEmail);
         btnGuardar = findViewById(R.id.btnGuardar);
+        btn_regresar=findViewById(R.id.btn_regresar);
 
         // Instancia de DbHelper para gestionar la base de datos
         DbHelper dbHelper = new DbHelper(this);
+
+        btn_regresar.setOnClickListener(v->{
+            finish();
+        });
 
         // Acción para guardar un contacto cuando se presiona el botón
         btnGuardar.setOnClickListener(v -> {

@@ -9,4 +9,6 @@
     <string name="btnGuardar">Guardar</string>
     <string name="btnCrearRegistro">Crear Registro</string>
     <string name="btnCrearDB">Crear Base de Datos</string>
+
+    <string name="btn_regresar">Regresar al Main</string>
 </resources>

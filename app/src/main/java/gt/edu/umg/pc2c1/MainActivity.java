@@ -13,8 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import gt.edu.umg.pc2c1.BaseDatos.DbContactos;
 import gt.edu.umg.pc2c1.BaseDatos.DbHelper;
+import gt.edu.umg.pc2c1.BaseDatos.entidades.Contactos;
+import gt.edu.umg.pc2c1.adaptadores.ListaContactosAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,10 +29,44 @@ public class MainActivity extends AppCompatActivity {
     // Declaración de los botones y el TextView
     Button btnSaludo, btnCrearDB, btnCrearRegistro;
     TextView tvSaludo;
+    RecyclerView listaContactos;
+
+    ArrayList<Contactos> listaArrayContactos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+            super.onCreate(savedInstanceState);
+            EdgeToEdge.enable(this);
+            setContentView(R.layout.activity_main);
+
+            //nuevo inicio
+            //poner la lista
+            String error;
+            try{
+                listaContactos = findViewById(R.id.listaContactos);
+
+                listaContactos.setLayoutManager(new LinearLayoutManager(this));
+            } catch (Exception e) {
+                Toast.makeText(this, "Error al cargar lista:"+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                error = e.getMessage();
+            }
+
+
+
+            //
+            DbContactos dbContactos = new DbContactos(this);
+            listaArrayContactos =  new ArrayList<>();   //dbContactos.mostrarContactos() ;
+
+
+            //llamamos a nuestro adaptador y le mandamos todos los contactos de nuestra consulta.
+            ListaContactosAdapter adapter = new ListaContactosAdapter(dbContactos.mostrarContactos());
+            //le pasamos el adaptador a nuestro recycler view y nuestra información estructurada.
+            listaContactos.setAdapter(adapter);
+            //super.onCreate(savedInstanceState);
+
+
         // Habilita un diseño que aprovecha todo el borde de la pantalla
         EdgeToEdge.enable(this);
         // Establece el archivo de diseño de la actividad

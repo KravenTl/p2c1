@@ -2,9 +2,14 @@ package gt.edu.umg.pc2c1.BaseDatos;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+
+import gt.edu.umg.pc2c1.BaseDatos.entidades.Contactos;
 
 public class DbContactos extends DbHelper {
 
@@ -37,6 +42,37 @@ public class DbContactos extends DbHelper {
             return -1;
         }
 
+    }
+
+    //Para devolver la lista de contactos que tengo en la lista de contactos
+    public ArrayList<Contactos> mostrarContactos(){
+        try{
+            DbHelper dbHelper= new DbHelper(context);
+            SQLiteDatabase db= dbHelper.getReadableDatabase();
+            ArrayList<Contactos> ListaContactos=new ArrayList<>();
+            Contactos contacto = null;
+            Cursor cursorContactos = db.rawQuery("select * from " + DbHelper.TABLE_CONTACTOS, null);
+
+
+            //Validamos si hay informacion
+            if(cursorContactos.moveToFirst()){
+
+                do{
+                    contacto =new Contactos();
+                    contacto.setId(cursorContactos.getInt(0));
+                    contacto.setNombre(cursorContactos.getString(1));
+                    contacto.setTelefono(cursorContactos.getString(2));
+                    contacto.setEmail(cursorContactos.getString(3));
+                    ListaContactos.add(contacto);
+
+
+                }while (cursorContactos.moveToNext());
+            }
+            cursorContactos.close();
+            return ListaContactos;
+        }catch (Exception ex){
+            return null;
+        }
     }
 }
 

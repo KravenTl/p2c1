@@ -42,6 +42,12 @@
         android:minHeight="48dp"
         android:text="@string/btnGuardar" />
 
+    <Button
+        android:id="@+id/btn_regresar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Regresar al menu" />
+
     <TextView
         android:id="@+id/textDatos"
         android:layout_width="match_parent"
